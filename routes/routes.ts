@@ -6,7 +6,7 @@ import {
   addPizza,
   updatePizza,
   deletePizza,
-} from "./pizzas.ts";
+} from "../controller/pizzas.ts";
 
 const router = new Router();
 

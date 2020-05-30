@@ -1,4 +1,4 @@
-import pizzaObj from "./mongo.ts";
+import pizzaObj from "../db/mongo.ts";
 
 const home = ({ response }: { response: any }) => {
   response.body = "Hello to Pizzas REST API";
