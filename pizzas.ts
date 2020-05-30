@@ -1,10 +1,4 @@
-import { MongoClient } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
-
-const client = new MongoClient();
-client.connectWithUri("mongodb://127.0.0.1:27017");
-
-const db = client.database("test");
-const dbobj = db.collection("pizzas");
+import pizzaObj from "./mongo.ts";
 
 const home = ({ response }: { response: any }) => {
   response.body = "Hello to Pizzas REST API";
@@ -14,7 +8,7 @@ const home = ({ response }: { response: any }) => {
 //@route Get /api/v1/products
 
 const getPizzas = async ({ response }: { response: any }) => {
-  const products = await dbobj.find();
+  const products = await pizzaObj.find();
 
   response.body = {
     success: true,
@@ -32,7 +26,7 @@ const getPizza = async ({
   params: { id: string };
   response: any;
 }) => {
-  const product = await dbobj.findOne({ _id: { $oid: params.id } });
+  const product = await pizzaObj.findOne({ _id: { $oid: params.id } });
 
   if (product) {
     response.body = {
@@ -67,7 +61,7 @@ const addPizza = async ({
     };
   } else {
     const product = body.value;
-    await dbobj.insertOne({
+    await pizzaObj.insertOne({
       product,
     });
     response.status = 201;
@@ -88,7 +82,7 @@ const updatePizza = async ({
   request: any;
 }) => {
   const body = await request.body();
-  const product = await dbobj.updateOne(
+  const product = await pizzaObj.updateOne(
     { _id: { $oid: params.id } },
     {
       $set: {
@@ -120,7 +114,7 @@ const deletePizza = async ({
   params: { id: string };
   response: any;
 }) => {
-  const product = await dbobj.deleteOne({ _id: { $oid: params.id } });
+  const product = await pizzaObj.deleteOne({ _id: { $oid: params.id } });
 
   if (product) {
     response.body = {
