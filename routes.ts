@@ -12,10 +12,10 @@ const router = new Router();
 
 router
   .get("/", home)
-  .get("/pizzas", getPizzas)
-  .get("/pizzas/:id", getPizza)
-  .post("/pizzas", addPizza)
-  .put("/pizzas/:id", updatePizza)
-  .delete("/pizzas/:id", deletePizza);
+  .get("/api/v1/pizzas", getPizzas)
+  .get("/api/v1/pizzas/:id", getPizza)
+  .post("/api/v1/pizzas", addPizza)
+  .put("/api/v1/pizzas/:id", updatePizza)
+  .delete("/api/v1/pizzas/:id", deletePizza);
 
 export default router;
