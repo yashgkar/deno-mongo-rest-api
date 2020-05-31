@@ -1,7 +1,8 @@
 import pizzaObj from "../db/mongo.ts";
 
 const home = ({ response }: { response: any }) => {
-  response.body = "Hello to Pizzas REST API";
+  response.body =
+    "Hello to Pizzas REST API\n GET: '/api/v1/pizzas' returns all pizzas in database \n GET: '/api/v1/pizzas/:id' returns single pizza for given param id \n POST 'api/v1/pizzas' adds new pizza in the database \n PUT: '/api/v1/pizzas/:id' updates an existing pizza \n DELETE '/api/v1/pizzas/:id' deletes a pizza in database for given param id";
 };
 
 //@desc Get all products
@@ -116,10 +117,10 @@ const deletePizza = async ({
 }) => {
   const product = await pizzaObj.deleteOne({ _id: { $oid: params.id } });
 
-  if (product) {
+  if (product === 1) {
     response.body = {
       success: true,
-      data: product,
+      data: "Pizza Deleted",
     };
   } else {
     response.body = {
